@@ -125,7 +125,15 @@ void switchBase(void)
     if (BASE_MAX < mode)
         mode = 0;
     WriteNvram(EEPROM_BASE, mode);
-    emitBaseName();
+    // emitBaseName();
+    switch (mode) {
+    case BASE_QWERTY:
+        emitKey(KEY_Q);
+        break;
+    case BASE_DVORAK:
+        emitKey(KEY_D);
+        break;
+    }
 }
 
 int8_t isDigit(uint8_t code)
