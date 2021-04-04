@@ -527,9 +527,8 @@ void loadKanaSettings(void);
 #define BASE_COLEMAK    2
 #define BASE_JIS        3
 #define BASE_NICOLA_F   4
-#define BASE_MAX        BASE_NICOLA_F
+#define BASE_MAX        BASE_DVORAK
 #define BASE_DEFAULT    BASE_DVORAK
-
 void emitBaseName(void);
 void switchBase(void);
 
