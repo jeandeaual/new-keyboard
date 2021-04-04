@@ -528,7 +528,7 @@ void loadKanaSettings(void);
 #define BASE_JIS        3
 #define BASE_NICOLA_F   4
 #define BASE_MAX        BASE_NICOLA_F
-#define BASE_DEFAULT    BASE_QWERTY
+#define BASE_DEFAULT    BASE_DVORAK
 
 void emitBaseName(void);
 void switchBase(void);
@@ -545,7 +545,7 @@ int8_t isJP(void);
 #ifndef KANA_MAX
 #define KANA_MAX        KANA_MTYPE
 #endif
-#define KANA_DEFAULT    KANA_ROMAJI
+#define KANA_DEFAULT    KANA_TRON
 
 void emitKanaName(void);
 void switchKana(void);
@@ -561,7 +561,7 @@ void switchKana(void);
 #define OS_SHIFT_SP     8   // Shift-Space
 #define OS_CTRL_SP      9   // Ctrl-Space
 #define OS_MAX          OS_CTRL_SP
-#define OS_DEFAULT      OS_PC
+#define OS_DEFAULT      OS_104B
 
 void emitOSName(void);
 void switchOS(void);
@@ -582,7 +582,7 @@ void switchOS(void);
 #define MOD_XCJA        10      // Apple
 #define MOD_XSJA        11      // Apple
 #define MOD_MAX         MOD_XSJA
-#define MOD_DEFAULT     MOD_XC
+#define MOD_DEFAULT     MOD_C
 
 void emitModName(void);
 void switchMod(void);
@@ -629,7 +629,7 @@ void switchIME(void);
 #define PREFIXSHIFT_ON      1
 #define PREFIXSHIFT_LED     2
 #define PREFIXSHIFT_MAX     PREFIXSHIFT_LED
-#define PREFIXSHIFT_DEFAULT PREFIXSHIFT_OFF
+#define PREFIXSHIFT_DEFAULT PREFIXSHIFT_LED
 
 void emitPrefixShift(void);
 void switchPrefixShift(void);
