@@ -527,9 +527,8 @@ void loadKanaSettings(void);
 #define BASE_COLEMAK    2
 #define BASE_JIS        3
 #define BASE_NICOLA_F   4
-#define BASE_MAX        BASE_NICOLA_F
+#define BASE_MAX        1
 #define BASE_DEFAULT    BASE_DVORAK
-
 void emitBaseName(void);
 void switchBase(void);
 
@@ -560,7 +559,7 @@ void switchKana(void);
 #define OS_ALT_SP       7   // Alt-Space
 #define OS_SHIFT_SP     8   // Shift-Space
 #define OS_CTRL_SP      9   // Ctrl-Space
-#define OS_MAX          OS_CTRL_SP
+#define OS_MAX          9
 #define OS_DEFAULT      OS_104B
 
 void emitOSName(void);
@@ -581,7 +580,7 @@ void switchOS(void);
 #define MOD_SJA         9       // Apple
 #define MOD_XCJA        10      // Apple
 #define MOD_XSJA        11      // Apple
-#define MOD_MAX         MOD_XSJA
+#define MOD_MAX         11
 #define MOD_DEFAULT     MOD_C
 
 void emitModName(void);
@@ -596,7 +595,7 @@ void switchMod(void);
 #define DELAY_24        2
 #define DELAY_36        3
 #define DELAY_48        4
-#define DELAY_MAX       DELAY_48
+#define DELAY_MAX       4
 #define DELAY_DEFAULT   DELAY_0
 
 void emitDelayName(void);
@@ -609,7 +608,7 @@ void switchDelay(void);
 #define LED_CENTER_CAPS     4
 #define LED_RIGHT_SCROLL    5
 #define LED_OFF             6
-#define LED_MAX             LED_OFF
+#define LED_MAX             6
 #define LED_DEFAULT         LED_CENTER_CAPS
 
 void emitLEDName(void);
@@ -619,7 +618,7 @@ void switchLED(void);
 #define IME_ATOK        1
 #define IME_GOOGLE      2
 #define IME_APPLE       3
-#define IME_MAX         IME_APPLE
+#define IME_MAX         3
 #define IME_DEFAULT     IME_MS
 
 void emitIMEName(void);
@@ -628,7 +627,7 @@ void switchIME(void);
 #define PREFIXSHIFT_OFF     0
 #define PREFIXSHIFT_ON      1
 #define PREFIXSHIFT_LED     2
-#define PREFIXSHIFT_MAX     PREFIXSHIFT_LED
+#define PREFIXSHIFT_MAX     2
 #define PREFIXSHIFT_DEFAULT PREFIXSHIFT_LED
 
 void emitPrefixShift(void);
