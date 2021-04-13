@@ -541,10 +541,13 @@ int8_t isJP(void);
 #define KANA_STICKNEY   3
 #define KANA_X6004      4
 #define KANA_MTYPE      5
+#define KANA_TRON_DUAL  6
 #ifndef KANA_MAX
-#define KANA_MAX        KANA_MTYPE
-#endif
+#define KANA_MAX        KANA_TRON_DUAL
+#define KANA_DEFAULT    KANA_TRON_DUAL
+#else
 #define KANA_DEFAULT    KANA_TRON
+#endif
 
 void emitKanaName(void);
 void switchKana(void);

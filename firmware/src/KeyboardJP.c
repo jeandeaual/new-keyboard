@@ -26,14 +26,17 @@ static uint8_t const kanaKeys[KANA_MAX + 1][MAX_KANA_KEY_NAME] =
     {KEY_R, KEY_O, KEY_M, KEY_A, KEY_ENTER},
     {KEY_N, KEY_I, KEY_C, KEY_O, KEY_ENTER},
     {KEY_T, KEY_R, KEY_O, KEY_N, KEY_ENTER},
-#if 3 <= KANA_MAX
+#if KANA_STICKNEY <= KANA_MAX
     {KEY_S, KEY_T, KEY_I, KEY_C, KEY_K, KEY_ENTER},
 #endif
-#if 4 <= KANA_MAX
+#if KANA_X6004 <= KANA_MAX
     {KEY_X, KEY_6, KEY_0, KEY_0, KEY_4, KEY_ENTER},
 #endif
-#if 5 <= KANA_MAX
+#if KANA_MTYPE <= KANA_MAX
     {KEY_M, KEY_T, KEY_Y, KEY_P, KEY_E, KEY_ENTER},
+#endif
+#if KANA_TRON_DUAL <= KANA_MAX
+    {KEY_T, KEY_R, KEY_O, KEY_N, KEY_D, KEY_ENTER},
 #endif
 };
 
@@ -291,6 +294,41 @@ static uint8_t const matrixTronRight[7][12] =
     {ROMA_XKA, ROMA_XKE, ROMA_ZE, ROMA_ZA, ROMA_BE, 0, 0, ROMA_WA, ROMA_XI, ROMA_XA, ROMA_HANDAKU, ROMA_XU},
 };
 
+#if KANA_TRON_DUAL <= KANA_MAX
+static uint8_t const matrixTronDualLeft[7][12] =
+{
+    {ROMA_LCB, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+    {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+    {ROMA_RCB, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+    {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+    {ROMA_HI, ROMA_SO, ROMA_NAKAGURO, ROMA_XYA, ROMA_HO, 0, 0, ROMA_GI, ROMA_GE, ROMA_GU, ROMA_QUESTION, ROMA_WYI},
+    {ROMA_NU, ROMA_NE, ROMA_XYU, ROMA_YO, ROMA_HU, 0, 0, ROMA_DAKUTEN, ROMA_DI, ROMA_VU, ROMA_ZI, ROMA_WYE},
+    {ROMA_XE, ROMA_XO, ROMA_SE, ROMA_YU, ROMA_HE, 0, 0, ROMA_ZU, ROMA_DU, ROMA_TOUTEN, ROMA_HANDAKU, ROMA_XWA},
+};
+
+static uint8_t const matrixTronDualRight[7][12] =
+{
+    {ROMA_LWCB, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+    {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+    {ROMA_RWCB, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+    {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+    {ROMA_BI, ROMA_ZO, ROMA_GO, ROMA_BA, ROMA_BO, 0, 0, ROMA_E, ROMA_KE, ROMA_ME, ROMA_MU, ROMA_RO},
+    {ROMA_DA, ROMA_DO, ROMA_GA, ROMA_DE, ROMA_BU, 0, 0, ROMA_O, ROMA_TI, ROMA_CHOUON, ROMA_MI, ROMA_YA},
+    {ROMA_XKA, ROMA_XKE, ROMA_ZE, ROMA_ZA, ROMA_BE, 0, 0, ROMA_WA, ROMA_XI, ROMA_XA, ROMA_SANTEN, ROMA_XU},
+};
+
+static uint8_t const matrixTronDualBoth[7][12] =
+{
+    {ROMA_LCB, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+    {ROMA_SANTEN, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+    {ROMA_RCB, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+    {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+    {ROMA_PI, ROMA_SO, ROMA_NAKAGURO, ROMA_PA, ROMA_PO, 0, 0, ROMA_GI, ROMA_GE, ROMA_GU, ROMA_QUESTION, ROMA_WYI},
+    {ROMA_NU, ROMA_NE, ROMA_XYU, ROMA_YO, ROMA_PU, 0, 0, ROMA_DAKUTEN, ROMA_DI, ROMA_VU, ROMA_ZI, ROMA_WYE},
+    {ROMA_XE, ROMA_XO, ROMA_SE, ROMA_YU, ROMA_PE, 0, 0, ROMA_ZU, ROMA_DU, ROMA_COMMA, ROMA_PERIOD, ROMA_XWA},
+};
+#endif
+
 //
 // Nicola
 //
@@ -524,7 +562,7 @@ static void processRomaji(uint8_t roma, uint8_t a[])
 }
 
 static int8_t processKana(const uint8_t* current, const uint8_t* processed, uint8_t* report,
-                          const uint8_t base[][12], const uint8_t left[][12], const uint8_t right[][12])
+                          const uint8_t base[][12], const uint8_t left[][12], const uint8_t right[][12], const uint8_t both[][12])
 {
     uint8_t mod = current[0];
     uint8_t modifiers;
@@ -555,12 +593,14 @@ static int8_t processKana(const uint8_t* current, const uint8_t* processed, uint
         if ((mod & MOD_SHIFT) == MOD_SHIFT) {
             if (lastMod & MOD_LEFTSHIFT)
                 mod &= ~MOD_LEFTSHIFT;
-            else if (processed[0] & MOD_RIGHTSHIFT)
+            if (lastMod & MOD_RIGHTSHIFT)
                 mod &= ~MOD_RIGHTSHIFT;
         }
 
         if (7 <= row)
             roma = 0;
+        else if (mod & MOD_LEFTSHIFT && mod & MOD_RIGHTSHIFT)
+            roma = both[row][column];
         else if (mod & MOD_LEFTSHIFT)
             roma = left[row][column];
         else if (mod & MOD_RIGHTSHIFT)
@@ -682,20 +722,24 @@ int8_t processKeysKana(const uint8_t* current, const uint8_t* processed, uint8_t
 {
     switch (mode) {
     case KANA_TRON:
-        return processKana(current, processed, report, matrixTron, matrixTronLeft, matrixTronRight);
+        return processKana(current, processed, report, matrixTron, matrixTronLeft, matrixTronRight, matrixTronLeft);
     case KANA_NICOLA:
-        return processKana(current, processed, report, matrixNicola, matrixNicolaLeft, matrixNicolaRight);
+        return processKana(current, processed, report, matrixNicola, matrixNicolaLeft, matrixNicolaRight, matrixNicolaLeft);
 #if KANA_MTYPE <= KANA_MAX
     case KANA_MTYPE:
-        return processKana(current, processed, report, matrixMtype, matrixMtypeShift, matrixMtypeShift);
+        return processKana(current, processed, report, matrixMtype, matrixMtypeShift, matrixMtypeShift, matrixMtypeShift);
 #endif
 #if KANA_STICKNEY <= KANA_MAX
     case KANA_STICKNEY:
-        return processKana(current, processed, report, matrixStickney, matrixStickneyShift, matrixStickneyShift);
+        return processKana(current, processed, report, matrixStickney, matrixStickneyShift, matrixStickneyShift, matrixStickneyShift);
 #endif
 #if KANA_X6004 <= KANA_MAX
     case KANA_X6004:
-        return processKana(current, processed, report, matrixX6004, matrixX6004Shift, matrixX6004Shift);
+        return processKana(current, processed, report, matrixX6004, matrixX6004Shift, matrixX6004Shift, matrixX6004Shift);
+#endif
+#if KANA_TRON_DUAL <= KANA_MAX
+    case KANA_TRON_DUAL:
+        return processKana(current, processed, report, matrixTron, matrixTronDualLeft, matrixTronDualRight, matrixTronDualBoth);
 #endif
     default:
         return processKeysBase(current, processed, report);
