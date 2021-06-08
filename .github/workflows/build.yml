@@ -19,42 +19,42 @@ jobs:
       - name: Prepare the artifact folder
         run: mkdir build
       - name: Build the project (PIC18F4550_NISSE)
-        uses: jeandeaual/mplabx-xc8-build-action@v0.1.0
+        uses: jeandeaual/mplabx-xc8-build-action@ffabc3e37254f937d9dfb2c24f0cfbd41be99181
         with:
           project: firmware/third_party/mla_v2013_12_20/apps/usb/device/hid_keyboard/firmware/MPLAB.X
           configuration: PIC18F4550_NISSE
       - name: Prepare the firmware file (PIC18F4550_NISSE)
         run: sudo mv firmware/third_party/mla_v2013_12_20/apps/usb/device/hid_keyboard/firmware/MPLAB.X/dist/PIC18F4550_NISSE/production/MPLAB.X.production.hex build/esrille.nisse.pic18f4550.hex
       - name: Build the project (PIC18F4550_NISSE_TSAP)
-        uses: jeandeaual/mplabx-xc8-build-action@v0.1.0
+        uses: jeandeaual/mplabx-xc8-build-action@ffabc3e37254f937d9dfb2c24f0cfbd41be99181
         with:
           project: firmware/third_party/mla_v2013_12_20/apps/usb/device/hid_keyboard/firmware/MPLAB.X
           configuration: PIC18F4550_NISSE_TSAP
       - name: Prepare the firmware file (PIC18F4550_NISSE_TSAP)
         run: sudo mv firmware/third_party/mla_v2013_12_20/apps/usb/device/hid_keyboard/firmware/MPLAB.X/dist/PIC18F4550_NISSE_TSAP/production/MPLAB.X.production.hex build/esrille.nisse.pic18f4550.tsap.hex
       - name: Build the project (PIC18F47J53_NISSE_USB)
-        uses: jeandeaual/mplabx-xc8-build-action@v0.1.0
+        uses: jeandeaual/mplabx-xc8-build-action@ffabc3e37254f937d9dfb2c24f0cfbd41be99181
         with:
           project: firmware/third_party/mla_v2013_12_20/apps/usb/device/hid_keyboard/firmware/MPLAB.X
           configuration: PIC18F47J53_NISSE_USB
       - name: Prepare the firmware file (PIC18F47J53_NISSE_USB)
         run: sudo mv firmware/third_party/mla_v2013_12_20/apps/usb/device/hid_keyboard/firmware/MPLAB.X/dist/PIC18F47J53_NISSE_USB/production/MPLAB.X.production.hex build/esrille.nisse.pic18f47j53.hex
       - name: Build the project (PIC18F47J53_NISSE_USB_TSAP)
-        uses: jeandeaual/mplabx-xc8-build-action@v0.1.0
+        uses: jeandeaual/mplabx-xc8-build-action@ffabc3e37254f937d9dfb2c24f0cfbd41be99181
         with:
           project: firmware/third_party/mla_v2013_12_20/apps/usb/device/hid_keyboard/firmware/MPLAB.X
           configuration: PIC18F47J53_NISSE_USB_TSAP
       - name: Prepare the firmware file (PIC18F47J53_NISSE_USB_TSAP)
         run: sudo mv firmware/third_party/mla_v2013_12_20/apps/usb/device/hid_keyboard/firmware/MPLAB.X/dist/PIC18F47J53_NISSE_USB_TSAP/production/MPLAB.X.production.hex build/esrille.nisse.pic18f47j53.tsap.hex
       - name: Build the project (PIC18F47J53_NISSE_BLE)
-        uses: jeandeaual/mplabx-xc8-build-action@v0.1.0
+        uses: jeandeaual/mplabx-xc8-build-action@ffabc3e37254f937d9dfb2c24f0cfbd41be99181
         with:
           project: firmware/third_party/mla_v2013_12_20/apps/usb/device/hid_keyboard/firmware/MPLAB.X
           configuration: PIC18F47J53_NISSE_BLE
       - name: Prepare the firmware file (PIC18F47J53_NISSE_BLE)
         run: sudo mv firmware/third_party/mla_v2013_12_20/apps/usb/device/hid_keyboard/firmware/MPLAB.X/dist/PIC18F47J53_NISSE_BLE/production/MPLAB.X.production.hex build/esrille.nisse.pic18f47j53.ble.hex
       - name: Build the project (PIC18F47J53_NISSE_BLE_TSAP)
-        uses: jeandeaual/mplabx-xc8-build-action@v0.1.0
+        uses: jeandeaual/mplabx-xc8-build-action@ffabc3e37254f937d9dfb2c24f0cfbd41be99181
         with:
           project: firmware/third_party/mla_v2013_12_20/apps/usb/device/hid_keyboard/firmware/MPLAB.X
           configuration: PIC18F47J53_NISSE_BLE_TSAP
